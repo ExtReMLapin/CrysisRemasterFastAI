@@ -1,0 +1,79 @@
+<item name="FastLightMOAC" class="Weapon"  weaponParams="1">
+	<params>
+		<param name="equipeable"	value="1" />
+		<param name="giveable" 		value="0" />
+		<param name="selectable" 	value="1" />
+		<param name="pickable" 		value="0" />
+		<param name="mountable" 	value="0" />
+		<param name="usable"		 	value="0" />
+		<param name="arms"			 	value="0" />
+	</params>
+	<ai_descriptor handler="instant" speed="28" coverFireTime="3" damage_radius="-1" charge_time="0.5" burstBulletCountMin="15" burstBulletCountMax="25" 
+		draw_time="0.2" sweep_width="1.5" sweep_frequency="2.5" burstPauseTimeMin="1.2" burstPauseTimeMax="2.5" singleFireTriggerTime="-1" />
+	<ammos>
+		<ammo name="lightacmo" amount="1000" />
+	</ammos>
+	<actions>	
+		<action name="spin_up">
+			<sound target="thirdperson" name="sounds/weapons:moac_small:spin_up" radius="15" static="1" />
+		</action>
+		<action name="spin_down">
+			<sound target="thirdperson" name="sounds/weapons:moac_small:spin_down" radius="15" static="1" />
+		</action>
+		<action name="rapid_fire">
+			<sound target="thirdperson" name="sounds/weapons:moac_small:fire_loop" radius="100" static="1" synched="1"/>
+		</action>
+		<action name="blast">
+			<sound target="thirdperson" name="sounds/weapons:moac_small:fire" radius="100" static="1" />
+		</action>		
+		<action name="fire">
+			<animation target="thirdperson" name="fire_acmo_01" />
+			<animation target="owner" name="shoot" />
+			<sound target="thirdperson" name="sounds/weapons:moac_small:fire" radius="100" static="1" />
+		</action>
+		<action name="idle">
+			<animation target="thirdperson" name="idle_01" />
+			<animation target="owner" name="idle" />
+		</action>
+	</actions>
+	<firemodes>
+		<firemode name="Rapid" type="Rapid">
+			<fire>
+				<param name="spin_up_time" value="0.5"/>
+				<param name="ammo_type" value="lightacmo" />
+				<param name="rate" value="600" />
+				<param name="damage" value="20" />
+				<param name="clip_size" value="-1" />
+				<param name="max_clips" value="-1" />
+				<param name="offset" value="1" />
+				<param name="helper_tp" value="dummy" />
+				<param name="secondary_damage" value="1" />
+				<param name="ai_vs_player_damage" value="5" />
+					<ai_vs_player_damage>
+						<level_2 damage="10"/>
+						<level_3 damage="15"/>
+						<level_4 damage="20"/>
+					</ai_vs_player_damage>
+			</fire>
+			<spread>
+				<param name="min" value="0.035" />
+				<param name="max" value="0.10" />
+				<param name="attack" value="0.01" />
+				<param name="decay" value="0.10" />
+			</spread>
+
+			<rapid>
+				<param name="min_speed" value="2.55" />
+				<param name="max_speed" value="3.25" />
+				<param name="acceleration" value="8.25" />
+				<param name="deceleration" value="-8.0" />
+			</rapid>
+		<spinup>
+				<thirdperson effect="Alien_Weapons.Moac.Trooper_Moac_charge" helper="dummy"  time="2.0" light_radius="0" />
+		</spinup>
+		<muzzleflash>
+				<thirdperson effect="Alien_Weapons.Moac.Trooper_Moac_Firing" helper="dummy" time="1.0" light_radius="0" />
+		</muzzleflash>
+		</firemode>
+	</firemodes>
+</item>

@@ -1,0 +1,85 @@
+<VehicleDamagesTemplates name="DefaultVehicleDamages">
+	<DamagesGroups>
+		<DamagesGroup name="VehicleDestroy">
+			<DamagesSubGroups>
+				<DamagesSubGroup delay="0" randomness="0.5">
+					<DamageBehaviors>
+						<DamageBehavior class="Destroy" />
+						<DamageBehavior class="Effect" >
+							<Effect effect="VehicleDestroyed" />
+						</DamageBehavior>
+						<DamageBehavior class="SpawnDebris"/>
+					</DamageBehaviors>
+				</DamagesSubGroup>
+			</DamagesSubGroups>
+		</DamagesGroup>
+		<DamagesGroup name="CarDestroy" useTemplate="VehicleDestroy">
+			<DamagesSubGroups>
+				<DamagesSubGroup delay="0.2" randomness="1">
+					<DamageBehaviors>
+						<DamageBehavior class="Explosion" >
+							<Explosion damage="350" helper="vehicleBurnPos" pressure="3000" radius="10" minRadius="5" physRadius="3" minPhysRadius="2.2" />
+						</DamageBehavior>
+						<DamageBehavior class="Indicator" damageRatioMin="0.75">
+							<Indicator>
+								<Light material="" sound="sounds/vehicles:vehicle_accessories:warning_beep_wheeled" soundRatioMin="0.75" helper="turretPos"/>
+							</Indicator>
+					   	</DamageBehavior>
+					</DamageBehaviors>
+				</DamagesSubGroup>
+				<DamagesSubGroup delay="3" randomness="0.25">
+					<DamageBehaviors>
+						<DamageBehavior class="Burn" >
+							<Burn damage="5" helper="vehicleBurnPos" interval="1.0" radius="2" selfDamage="15" />
+						</DamageBehavior>
+					</DamageBehaviors>
+				</DamagesSubGroup>
+			</DamagesSubGroups>
+		</DamagesGroup>
+		<DamagesGroup name="TankDestroy" useTemplate="VehicleDestroy">
+			<DamagesSubGroups>
+				<DamagesSubGroup delay="0.2" randomness="1">
+					<DamageBehaviors>
+						<DamageBehavior class="Explosion">
+							<Explosion damage="500" helper="vehicleBurnPos" pressure="4000" radius="10" minRadius="5" physRadius="3" minPhysRadius="2.2" />
+						</DamageBehavior>
+						<DamageBehavior class="Indicator" damageRatioMin="0.75">
+							<Indicator>
+								<Light material="" sound="sounds/vehicles:vehicle_accessories:warning_beep_tank" soundRatioMin="0.75" helper="turretPos"/>
+							</Indicator>
+					    	</DamageBehavior>
+				</DamageBehaviors>
+				</DamagesSubGroup>
+				<DamagesSubGroup delay="2" randomness="1">
+					<DamageBehaviors>
+						<DamageBehavior class="Burn" >
+							<Burn damage="5" helper="vehicleBurnPos" interval="1.0" radius="4" selfDamage="25" />
+						</DamageBehavior>
+					</DamageBehaviors>
+				</DamagesSubGroup>
+			</DamagesSubGroups>
+		</DamagesGroup>
+		<DamagesGroup name="BoatDestroy" useTemplate="VehicleDestroy">
+			<DamagesSubGroups>
+				<DamagesSubGroup delay="0.2" randomness="1">
+					<DamageBehaviors>
+						<DamageBehavior class="Indicator" damageRatioMin="0.75">
+							<Indicator>
+								<Light material="" sound="sounds/vehicles:vehicle_accessories:warning_beep_boat" soundRatioMin="0.75" helper="turretPos"/>
+							</Indicator>
+						</DamageBehavior>
+						<DamageBehavior class="Explosion" >
+							<Explosion damage="300" helper="vehicleBurnPos" pressure="2000" radius="10" minRadius="5" physRadius="3" minPhysRadius="2.2" />
+						</DamageBehavior>
+						<DamageBehavior class="Sink" damageRatioMin="1"/>
+					</DamageBehaviors>
+				</DamagesSubGroup>				
+				<DamagesSubGroup delay="1" randomness="0">
+					<DamageBehaviors>						
+						<DamageBehavior class="Sink" damageRatioMin="1"/>
+					</DamageBehaviors>
+				</DamagesSubGroup>				
+			</DamagesSubGroups>
+		</DamagesGroup>
+	</DamagesGroups>
+</VehicleDamagesTemplates>

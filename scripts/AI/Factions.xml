@@ -1,0 +1,26 @@
+<Factions>
+	<Faction name="Players">
+		<Reaction faction="Marines" reaction="friendly" />
+		<Reaction faction="KPA" reaction="hostile" />
+		<Reaction faction="Aliens" reaction="hostile" />
+	</Faction>
+
+	<Faction name="Civilians" default="neutral" />
+
+	<Faction name="KPA" default="neutral">
+		<Reaction faction="Players" reaction="hostile" />
+	</Faction>
+	
+	<Faction name="Marines" default="hostile">
+		<Reaction faction="Players" reaction="friendly" />
+	</Faction>
+	
+	<Faction name="BlackOps" />
+	<Faction name="Aliens">
+		<Reaction faction="Players" reaction="hostile" />
+	</Faction>
+	<Faction name="Infected" default="neutral" />
+	<Faction name="HostileNPCs">
+		<Reaction faction="Players" reaction="hostile" />
+	</Faction>
+</Factions>

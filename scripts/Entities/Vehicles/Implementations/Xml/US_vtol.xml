@@ -1,0 +1,615 @@
+<Vehicle name="US_vtol" actionMap="vtol">
+ <Physics pushable="0">
+  <Buoyancy waterDensity="150" waterResistance="2500"/>
+  <Simulation maxTimeStep="0.02" minEnergy="0.16" maxLoggedCollisions="2"/>
+ </Physics>
+ <Damages submergedRatioMax="0.40000001" submergedDamageMult="2" collDamageThreshold="10" groundCollisionMinMult="0.0099999998" groundCollisionMaxMult="2" groundCollisionMinSpeed="4" groundCollisionMaxSpeed="60">
+  <DamageMultipliers>
+   <DamageMultiplier damageType="bullet" multiplier="0.001"/>
+   <DamageMultiplier damageType="moacbullet" multiplier="0.025"/>
+   <DamageMultiplier damageType="gaussbullet" multiplier="0.0099999998"/>
+   <DamageMultiplier damageType="melee" multiplier="0"/>
+   <DamageMultiplier damageType="fire" multiplier="0.0099999998"/>
+   <DamageMultiplier damageType="collision" multiplier="1"/>
+   <DamageMultiplier damageType="explosion" multiplier="1" splash="0.25"/>
+   <DamageMultiplier damageType="frag" multiplier="0.25" splash="0.25"/>
+   <DamageMultiplier damageType="aacannon" multiplier="0.07" splash="0"/>
+   <DamageMultiplier damageType="c4" multiplier="1" splash="0.25"/>
+   <DamageMultiplier damageType="tac" multiplier="0" splash="0"/>
+   <DamageMultiplier damageType="avmine" multiplier="0" splash="0"/>
+   <DamageMultiplier damageType="scout_moac" multiplier="0.5"/>
+  </DamageMultipliers>
+  <DamagesGroups>
+   <DamagesGroup name="Destroy" useTemplate="VehicleDestroy">
+    <DamagesSubGroups>
+     <DamagesSubGroup delay="0.34999999" randomness="0.1">
+      <DamageBehaviors>
+       <DamageBehavior class="Explosion">
+        <Explosion helper="impulsePos" damage="500" radius="15" minRadius="5" minPhysRadius="2.2" physRadius="3" pressure="1000"/>
+       </DamageBehavior>
+      </DamageBehaviors>
+     </DamagesSubGroup>
+     <DamagesSubGroup delay="0" randomness="0">
+      <DamageBehaviors>
+       <DamageBehavior class="HitPassenger">
+        <HitPassenger damage="100" isDamagePercent="1"/>
+       </DamageBehavior>
+      </DamageBehaviors>
+     </DamagesSubGroup>
+     <DamagesSubGroup delay="3" randomness="0.25">
+      <DamageBehaviors>
+       <DamageBehavior class="Burn">
+        <Burn helper="impulsePos" damage="5" selfDamage="10" radius="2" interval="0.5"/>
+       </DamageBehavior>
+      </DamageBehaviors>
+     </DamagesSubGroup>
+    </DamagesSubGroups>
+   </DamagesGroup>
+   <DamagesGroup name="DestroyEngine">
+    <DamagesSubGroups>
+     <DamagesSubGroup delay="0" randomness="0">
+      <DamageBehaviors>
+       <DamageBehavior class="MovementNotification">
+        <MovementNotification isDamageAlwaysFull="0"/>
+       </DamageBehavior>
+       <DamageBehavior class="Effect">
+        <Effect effect="EngineDamaged" disableAfterExplosion="1"/>
+       </DamageBehavior>
+       <DamageBehavior class="CameraShake">
+        <CameraShake />
+       </DamageBehavior>
+      </DamageBehaviors>
+     </DamagesSubGroup>
+    </DamagesSubGroups>
+   </DamagesGroup>
+  </DamagesGroups>
+ </Damages>
+ <Components>
+  <Component name="Hull" damageMax="800" major="1" minBound="-4.9706998,-9.1131001,-4.7231998" maxBound="4.9696002,9.7252998,4.4615002" useBoundsFromParts="0" id="idHull">
+   <DamageMultipliers>
+    <DamageMultiplier damageType="bullet" multiplier="0.0080000004"/>
+    <DamageMultiplier damageType="moacbullet" multiplier="0.025"/>
+    <DamageMultiplier damageType="gaussbullet" multiplier="0.0099999998"/>
+    <DamageMultiplier damageType="melee" multiplier="0"/>
+    <DamageMultiplier damageType="fire" multiplier="0.0099999998"/>
+    <DamageMultiplier damageType="collision" multiplier="0.079999998"/>
+    <DamageMultiplier damageType="explosion" multiplier="1" splash="0.25"/>
+    <DamageMultiplier damageType="frag" multiplier="0.25" splash="0.25"/>
+    <DamageMultiplier damageType="aacannon" multiplier="0.050000001" splash="0"/>
+    <DamageMultiplier damageType="c4" multiplier="1" splash="0.25"/>
+    <DamageMultiplier damageType="tac" multiplier="0" splash="0"/>
+    <DamageMultiplier damageType="avmine" multiplier="0" splash="0"/>
+    <DamageMultiplier damageType="scout_moac" multiplier="0.5"/>
+   </DamageMultipliers>
+   <DamageBehaviors>
+    <DamageBehavior class="Group" damageRatioMin="1">
+     <Group name="Destroy"/>
+    </DamageBehavior>
+    <DamageBehavior class="Group" damageRatioMin="0.25">
+     <Group name="DestroyEngine"/>
+    </DamageBehavior>
+    <DamageBehavior class="Effect" damageRatioMin="0.25" damageRatioMax="0.75" ignoreVehicleDestruction="1">
+     <Effect effect="HullDamaged25"/>
+    </DamageBehavior>
+    <DamageBehavior class="Effect" damageRatioMin="0.75" damageRatioMax="1" ignoreVehicleDestruction="1">
+     <Effect effect="HullDamaged75"/>
+    </DamageBehavior>
+    <DamageBehavior class="CollisionEx" damageRatioMin="0.25" damageRatioMax="1">
+     <CollisionEx component="CollisionDamages" damages="0.1"/>
+    </DamageBehavior>
+   </DamageBehaviors>
+  </Component>
+  <Component name="frontCockpit" damageMax="0" major="0" minBound="-0.77539998,2.0525,-2.4993" maxBound="0.73680001,8.5846996,2.2499001" useBoundsFromParts="0">
+   <DamageBehaviors />
+  </Component>
+  <Component name="Backseat1" damageMax="0" major="0" minBound="-1.3831,-0.25659999,-2.3076" maxBound="-0.94559997,0.55930001,-1.0808001" useBoundsFromParts="0">
+   <DamageBehaviors />
+  </Component>
+  <Component name="Backseat2" damageMax="0" major="0" minBound="-1.3832999,-1.5315,-2.3076" maxBound="-0.94580001,-0.71560001,-1.0808001" useBoundsFromParts="0">
+   <DamageBehaviors />
+  </Component>
+  <Component name="Backseat3" damageMax="0" major="0" minBound="-1.3831,-2.7827001,-2.3076" maxBound="-0.94559997,-1.9668,-1.0808001" useBoundsFromParts="0">
+   <DamageBehaviors />
+  </Component>
+  <Component name="Backseat4" damageMax="0" major="0" minBound="0.80830002,-0.35839999,-2.3076" maxBound="1.2458,0.45750001,-1.0808001" useBoundsFromParts="0">
+   <DamageBehaviors />
+  </Component>
+  <Component name="Backseat5" damageMax="0" major="0" minBound="0.80980003,-1.6084,-2.3076" maxBound="1.2473,-0.79250002,-1.0808001" useBoundsFromParts="0">
+   <DamageBehaviors />
+  </Component>
+  <Component name="Backseat6" damageMax="0" major="0" minBound="0.80049998,-2.7827001,-2.3076" maxBound="1.238,-1.9668,-1.0808001" useBoundsFromParts="0">
+   <DamageBehaviors />
+  </Component>
+  <Component name="BackDoor" damageMax="0" major="0" minBound="-0.80000001,-4,-2.5999999" maxBound="0.80000001,-3,0" useBoundsFromParts="0">
+   <DamageBehaviors />
+  </Component>
+  <Component name="FlippedOver" damageMax="1" major="0" minBound="0,0,0" maxBound="0,0,0" useBoundsFromParts="1">
+   <DamageBehaviors>
+    <DamageBehavior class="Effect" damageRatioMin="1">
+     <Effect effect="VehicleFlipped" disableAfterExplosion="1"/>
+    </DamageBehavior>
+    <DamageBehavior class="Burn">
+     <Burn helper="" damage="0" selfDamage="50" radius="5" interval="1"/>
+    </DamageBehavior>
+   </DamageBehaviors>
+  </Component>
+  <Component name="CollisionDamages" damageMax="0" minBound="-4.9706998,-9.1131001,-1.0159" maxBound="4.9695001,9.7252998,3.3736999" useBoundsFromParts="0">
+   <DamageBehaviors />
+  </Component>
+ </Components>
+ <Parts>
+  <Part name="hull" class="Animated" component="Hull" mass="19000" disablePhysics="0">
+   <Parts>
+    <Part name="vtol_door_back" class="AnimatedJoint" component="vtol_door_back"/>
+    <Part name="wing_left" class="AnimatedJoint" component="WingLeft">
+     <Parts>
+			 <Part name="Thruster_l_1" class="AnimatedJoint" component="WingLeft">
+				 <AnimatedJoint />
+			 </Part>
+			 <Part name="Thruster_l_2" class="AnimatedJoint" component="WingLeft">
+				 <AnimatedJoint />
+			 </Part>
+      <Part name="wing_left_end" class="AnimatedJoint" component="WingLeft">
+       <Parts>
+        <Part name="positionLightLeftWing" class="Light" component="WingLeft" helper="positionLightLeftWingPos">
+         <Light type="Rear" frequency="1" duration="0.2"/>
+        </Part>
+       </Parts>
+       <AnimatedJoint detachBaseForce="-1,0,0"/>
+      </Part>
+     </Parts>
+    </Part>
+    <Part name="wing_right_01" class="AnimatedJoint" component="WingRight">
+     <Parts>
+			<Part name="Thruster_r_1" class="AnimatedJoint" component="WingRight">
+				<AnimatedJoint />
+			</Part>
+			<Part name="Thruster_r_2" class="AnimatedJoint" component="WingRight">
+				<AnimatedJoint />
+			</Part>
+      <Part name="wing_right_02" class="AnimatedJoint" component="WingRight">
+       <Parts>
+        <Part name="positionLightRightWing" class="Light" component="WingRight" helper="positionLightRightWingPos">
+         <Light type="Rear" frequency="1" duration="0.2"/>
+        </Part>
+       </Parts>
+       <AnimatedJoint detachBaseForce="1,0,0"/>
+      </Part>
+     </Parts>
+    </Part>
+    <Part name="turret" class="AnimatedJoint">
+     <Parts>
+      <Part name="vtol_gun_pitch" class="AnimatedJoint">
+       <AnimatedJoint detachBaseForce="0,1,0"/>
+      </Part>
+      <Part name="searchLight" class="Light" component="searchLight" helper="searchLightPos">
+       <Light type="HeadLightDynamic" radius="40" diffuseMult="15" directFactor="10" frustumAngle="25"/>
+      </Part>
+     </Parts>
+     <AnimatedJoint />
+    </Part>
+   </Parts>
+   <Animated filename="Objects/Vehicles/US_Vtol/US_Vtol.cga" filenameDestroyed="Objects/Vehicles/US_Vtol/US_Vtol_destroyed.cga"/>
+  </Part>
+  <Part name="positionLightTopRear" class="Light" component="" helper="positionLightTopRearPos">
+   <Light type="Rear" frequency="1" duration="0.2"/>
+  </Part>
+ </Parts>
+ <Actions>
+  <Action class="LandingGears">
+   <Activations>
+    <Activation type="OnGroundCollision"/>
+   </Activations>
+   <LandingGears altitudeToRetractGears="18" velocityMax="20" isOnlyAutoForPlayer="1"/>
+  </Action>
+  <Action class="AutomaticDoor">
+   <Activations>
+    <Activation type="OnGroundCollision" id="idDoorAction"/>
+    <Activation type="OnUsed" param1="component" param2="vtol_door_back"/>
+   </Activations>
+   <AutomaticDoor animation="passengerDoors" timeMax="1" disabled="0" id="idDoorDisable"/>
+  </Action>
+  <Action class="Enter">
+   <Activations>
+    <Activation type="OnUsed" param1="component" param2="frontCockpit" distance="3"/>
+   </Activations>
+   <Enter>
+    <Seats>
+     <Seat value="driver"/>
+     <Seat value="gunner"/>
+    </Seats>
+   </Enter>
+  </Action>
+  <Action class="Enter">
+   <Activations>
+    <Activation type="OnUsed" param1="component" param2="Backseat1"/>
+   </Activations>
+   <Enter>
+    <Seats>
+     <Seat value="backseat1"/>
+    </Seats>
+   </Enter>
+  </Action>
+  <Action class="Enter">
+   <Activations>
+    <Activation type="OnUsed" param1="component" param2="Backseat2"/>
+   </Activations>
+   <Enter>
+    <Seats>
+     <Seat value="backseat2"/>
+    </Seats>
+   </Enter>
+  </Action>
+  <Action class="Enter">
+   <Activations>
+    <Activation type="OnUsed" param1="component" param2="Backseat3"/>
+   </Activations>
+   <Enter>
+    <Seats>
+     <Seat value="backseat3"/>
+    </Seats>
+   </Enter>
+  </Action>
+  <Action class="Enter">
+   <Activations>
+    <Activation type="OnUsed" param1="component" param2="Backseat4"/>
+   </Activations>
+   <Enter>
+    <Seats>
+     <Seat value="backseat4"/>
+    </Seats>
+   </Enter>
+  </Action>
+  <Action class="Enter">
+   <Activations>
+    <Activation type="OnUsed" param1="component" param2="Backseat5"/>
+   </Activations>
+   <Enter>
+    <Seats>
+     <Seat value="backseat5"/>
+    </Seats>
+   </Enter>
+  </Action>
+  <Action class="Enter">
+   <Activations>
+    <Activation type="OnUsed" param1="component" param2="Backseat6"/>
+   </Activations>
+   <Enter>
+    <Seats>
+     <Seat value="backseat6"/>
+    </Seats>
+   </Enter>
+  </Action>
+  <Action class="Enter">
+   <Activations>
+    <Activation type="OnUsed" param1="component" param2="BackDoor" distance="3"/>
+   </Activations>
+   <Enter>
+    <Seats>
+     <Seat value="backseat1"/>
+     <Seat value="backseat2"/>
+     <Seat value="backseat3"/>
+     <Seat value="backseat4"/>
+     <Seat value="backseat5"/>
+     <Seat value="backseat6"/>
+    </Seats>
+   </Enter>
+  </Action>
+ </Actions>
+  <Helpers>
+   <Helper name="passenger01_pos" position="0, 3.96789, 0.56063" direction="0,1,0" part="hull"/>
+	 <Helper name="passenger02_pos" position="0, 6.75541, -1.40652" direction="0,1,0" part="hull"/>
+	 <Helper name="passenger03_pos" position="-1.00598,0.0654297,-1.73729" direction="1,0,0" part="hull"/>
+    <Helper name="passenger04_pos" position="1.00598,0.0654297,-1.73729" direction="-1,0,0" part="hull"/>
+    <Helper name="passenger05_pos" position="-1.08154,-1.17773,-1.84023" direction="1,0,0" part="hull"/>
+    <Helper name="passenger06_pos" position="1.08154,-1.17773,-1.84023" direction="-1,0,0" part="hull"/>
+    <Helper name="passenger07_pos" position="-1.08154,-2.37158,-1.94077" direction="1,0,0" part="hull"/>
+    <Helper name="passenger08_pos" position="1.08154,-2.37158,-1.94077" direction="-1,0,0" part="hull"/>
+    <Helper name="enter_driver_left" position="-3.5422001,5.9970999,-3.2179999" direction="0,1,-0.0049999999" part="hull"/>
+    <Helper name="leftRocketOut" position="-1.1423,4.0042,-0.126" direction="0,1,-0.0049999999" part="hull"/>
+    <Helper name="rightRocketOut" position="1.1418,4.0042,-0.12899999" direction="0,1,-0.0049999999" part="hull"/>
+    <Helper name="bodyburn" position="0,3.0072999,1.411" direction="0,-0.029999999,0.99959999" part="hull"/>
+    <Helper name="gunner_enter_pos" position="-3.5151,5.0890999,-3.223" direction="0,1,-0.0049999999" part="hull"/>
+    <Helper name="passenger_enter_pos" position="0,-5.8188,-3.473" direction="0,1,0" part="hull"/>
+    <Helper name="impulsePos" position="0,2.0002,0" direction="0,1,0" part="hull"/>
+    <Helper name="backpassenger_exit_pos" position="0,-1.0007,-1.6357" direction="0,-1,0" part="hull"/>
+    <Helper name="positionLightTopRearPos" position="0,-7.1960001,1.6844" direction="0,1,0" part="hull"/>
+    <Helper name="burningPos" position="0,0,0.54860002" direction="0,1,0" part="hull"/>
+    <Helper name="exitPassenger03" position="-0.21439999,-6.1756001,-3.5481" direction="0.00050000002,1,0.003" part="hull"/>
+    <Helper name="exitPassenger04" position="-0.016000001,-5.3228998,-3.5437" direction="0.00050000002,1,0.003" part="hull"/>
+    <Helper name="exitPassenger06" position="-0.0188,-5.9709001,-3.5478001" direction="0.00050000002,1,0.003" part="hull"/>
+    <Helper name="exitPassenger07" position="0.1673,-5.7216001,-3.5455999" direction="0.00050000002,1,0.003" part="hull"/>
+
+		<Helper name="thruster1" position="-4.2430, 0.7644, -3.5513" direction="0.0,0.0,-1.0" part="Thruster_l_1"/>
+		<Helper name="thruster2" position="-4.2430, 1.9679, -3.6566" direction="0.0,0.0,-1.0" part="Thruster_l_2"/>
+		<Helper name="thruster3" position="4.2506, 0.7644, -3.5513" direction="0.0,0.0,-1.0" part="Thruster_r_1"/>
+		<Helper name="thruster4" position="4.2506, 1.9679, -3.6566" direction="0.0,0.0,-1.0" part="Thruster_r_2"/>
+  </Helpers> 
+ <Seats>
+  <Seat name="driver" part="" enterHelper="enter_driver_left" exitHelper="passenger_enter_pos" sitHelper="passenger01_pos" useBoundsForEntering="1" isDriver="1" isPassengerShielded="1" AimPart="" seatGroupIndex="1" blurMult="0" locked="Players" >
+   <Views>
+    <View class="FirstPerson" canRotate="0" rotationBoundsActionMult="0" rotationMin="-20,0,-80" rotationMax="10,0,80">
+     <FirstPerson helper="pilot_eye_pos" hidePlayer="1" hideVehicle="0"/>
+    </View>
+    <View class="FirstPerson" canRotate="0" rotationBoundsActionMult="0">
+     <FirstPerson helper="pilot_eye_pos" hideVehicle="1"/>
+    </View>
+    <View class="ActionThirdPerson" canRotate="0">
+     <ActionThirdPerson cameraPosOffset="0,0,0" cameraAimOffset="0,0,0" lagSpeed="6" velocityMult="0.0099999998,0,0.001" pitchAimDistScale="200" pitchCamDistScale="0.5" />
+    </View>
+   </Views>
+   <SeatActions>
+    <SeatAction class="Weapons">
+     <Weapons isSecondary="0">
+      <Weapons>
+       <Weapon class="USCoaxialGun" part="cannon" id="idWeaponPrimary">
+        <Helpers>
+         <Helper value="rightRocketOut"/>
+        </Helpers>
+       </Weapon>
+      </Weapons>
+     </Weapons>
+    </SeatAction>
+    <SeatAction class="Weapons">
+     <Weapons isSecondary="1" disablesShootToCrosshair="1">
+      <Weapons>
+       <Weapon class="SideWinder" part="hull" id="idWeaponDriver">
+        <Helpers>
+         <Helper value="leftRocketOut"/>
+         <Helper value="rightRocketOut"/>
+        </Helpers>
+       </Weapon>
+      </Weapons>
+     </Weapons>
+    </SeatAction>
+    <SeatAction class="Lights">
+     <Lights activation="toggle">
+      <LightParts>
+       <LightPart value="positionLightTopRear"/>
+       <LightPart value="positionLightLeftWing"/>
+       <LightPart value="positionLightRightWing"/>
+      </LightParts>
+     </Lights>
+    </SeatAction>
+   </SeatActions>
+   <Sounds inout="0" mood="1"/>
+  </Seat>
+  <Seat name="gunner" part="" enterHelper="gunner_enter_pos" exitHelper="passenger_enter_pos" sitHelper="passenger02_pos" isDriver="0" isPassengerShielded="1" AimPart="" seatGroupIndex="2" id="idSeatGunner" locked="Players" >
+   <Views>
+    <View class="FirstPerson" canRotate="0">
+     <FirstPerson helper="gunCamera" hideVehicle="0"/>
+    </View>
+    <View class="ActionThirdPerson" canRotate="0">
+     <ActionThirdPerson cameraPosOffset="0,0,0" cameraAimOffset="0,0,0" lagSpeed="5" velocityMult="0.0099999998,0.025,0.001" pitchAimDistScale="200" pitchCamDistScale="0.5" />
+    </View>
+   </Views>
+   <SeatActions>
+    <SeatAction class="RotateTurret" isAvailableRemotely="1"/>
+    <SeatAction class="Weapons" isAvailableRemotely="1">
+     <Weapons>
+      <Weapons>
+       <Weapon class="AvengerCannon" part="vtol_gun_pitch" id="idWeaponGunner">
+        <Helpers>
+         <Helper value="gunOut"/>
+        </Helpers>
+        <Actions>
+         <Action name="fire">
+          <Animations>
+           <Animation name="mg_fire"/>
+          </Animations>
+         </Action>
+        </Actions>
+       </Weapon>
+      </Weapons>
+     </Weapons>
+    </SeatAction>
+    <SeatAction class="Lights" isAvailableRemotely="1">
+     <Lights activation="toggle" sound="2">
+      <LightParts>
+       <LightPart value="searchLight"/>
+      </LightParts>
+     </Lights>
+    </SeatAction>
+   </SeatActions>
+   <Sounds inout="1" mood="1"/>
+  </Seat>
+  <Seat name="backseat1" part="" enterHelper="passenger_enter_pos" exitHelper="exitPassenger03" sitHelper="passenger03_pos" isDriver="0" isPassengerShielded="1" AimPart="" seatGroupIndex="3" locked="Players" >
+   <Views>
+    <View class="FirstPerson" canRotate="1">
+     <FirstPerson offset="0,0,0"/>
+    </View>
+    <View class="ThirdPerson" canRotate="0">
+     <FirstPerson helper=""/>
+     <ThirdPerson distance="15" speed="0"/>
+    </View>
+   </Views>
+   <SeatActions />
+   <Sounds inout="0" mood="1"/>
+  </Seat>
+  <Seat name="backseat2" part="" enterHelper="passenger_enter_pos" exitHelper="exitPassenger04" sitHelper="passenger04_pos" isDriver="0" isPassengerShielded="1" AimPart="" seatGroupIndex="3" locked="Players" >
+   <Views>
+    <View class="FirstPerson" canRotate="1">
+     <FirstPerson offset="0,0,0"/>
+    </View>
+    <View class="ThirdPerson" canRotate="0">
+     <FirstPerson helper=""/>
+     <ThirdPerson distance="15" speed="0"/>
+    </View>
+   </Views>
+   <SeatActions />
+   <Sounds inout="0" mood="1"/>
+  </Seat>
+  <Seat name="backseat3" part="" enterHelper="passenger_enter_pos" exitHelper="passenger_enter_pos" sitHelper="passenger05_pos" isDriver="0" isPassengerShielded="1" AimPart="" seatGroupIndex="3" locked="Players" >
+   <Views>
+    <View class="FirstPerson" canRotate="1">
+     <FirstPerson offset="0,0,0"/>
+    </View>
+    <View class="ThirdPerson" canRotate="0">
+     <FirstPerson helper=""/>
+     <ThirdPerson distance="15" speed="0"/>
+    </View>
+   </Views>
+   <SeatActions />
+   <Sounds inout="0" mood="1"/>
+  </Seat>
+  <Seat name="backseat4" part="" enterHelper="passenger_enter_pos" exitHelper="exitPassenger06" sitHelper="passenger06_pos" isDriver="0" isPassengerShielded="1" AimPart="" seatGroupIndex="4" locked="Players" >
+   <Views>
+    <View class="FirstPerson" canRotate="1">
+     <FirstPerson offset="0,0,0"/>
+    </View>
+    <View class="ThirdPerson" canRotate="0">
+     <FirstPerson helper=""/>
+     <ThirdPerson distance="15" speed="0"/>
+    </View>
+   </Views>
+   <SeatActions />
+   <Sounds inout="0" mood="1"/>
+  </Seat>
+  <Seat name="backseat5" part="" enterHelper="passenger_enter_pos" exitHelper="exitPassenger07" sitHelper="passenger07_pos" isDriver="0" isPassengerShielded="1" AimPart="" seatGroupIndex="4" locked="Players" >
+   <Views>
+    <View class="FirstPerson" canRotate="1">
+     <FirstPerson offset="0,0,0"/>
+    </View>
+    <View class="ThirdPerson" canRotate="0">
+     <FirstPerson helper=""/>
+     <ThirdPerson distance="15" speed="0"/>
+    </View>
+   </Views>
+   <SeatActions />
+   <Sounds inout="0" mood="1"/>
+  </Seat>
+  <Seat name="backseat6" part="" enterHelper="passenger_enter_pos" exitHelper="passenger_enter_pos" sitHelper="passenger08_pos" isDriver="0" isPassengerShielded="1" AimPart="" seatGroupIndex="4" locked="Players" >
+   <Views>
+    <View class="FirstPerson" canRotate="1">
+     <FirstPerson offset="0,0,0"/>
+    </View>
+    <View class="ThirdPerson" canRotate="0">
+     <FirstPerson helper=""/>
+     <ThirdPerson distance="15" speed="0"/>
+    </View>
+   </Views>
+   <SeatActions />
+   <Sounds inout="0" mood="1"/>
+  </Seat>
+ </Seats>
+ <SeatGroups>
+  <SeatGroup name="Cabin" keepEngineWarm="1">
+   <Seats>
+    <Seat value="driver"/>
+    <Seat value="gunner"/>
+   </Seats>
+  </SeatGroup>
+ </SeatGroups>
+ <MovementParams>
+  <VTOL engineWarmupDelay="1" engineIgnitionTime="0" enginePowerMax="10" rotationDamping="40" angleLift="4" altitudeMax="1050" rotorDiskTiltScale="0.80000001" pitchResponsiveness="4" rollResponsiveness="4" yawResponsiveness="4" maxYawRate="18" maxFwdSpeed="85" maxLeftSpeed="50" maxSpeed="16" maxUpSpeed="20" basicSpeedFraction="0.69999999" yawDecreaseWithSpeed="250" tiltPerVelDifference="0.039999999" maxTiltAngle="0.15000001" extraRollForTurn="0" rollForTurnForce="0.40000001" yawPerRoll="0" pitchActionPerTilt="5" powerInputConst="0" powerInputDamping="-10" pitchInputConst="3" yawInputConst="3" yawInputDamping="-0.5" horizFwdForce="15" horizLeftForce="10" boostForce="0.5" strafeForce="0.2" relaxForce="0.5" maxRollAngle="35" impulseHelper="impulsePos" wingsSpeed="15" WingComponentLeft="WingLeft" WingComponentRight="WingRight">
+   <SoundParams engineSoundPosition="rotorSmokeOut" runSoundDelay="1" rpmPitchSpeed="1.2"/>
+   <TweakGroups>
+    <TweakGroup name="ai">
+     <Tweaks>
+      <Tweak name="enginePowerMax" value="0.75" op="1"/>
+      <Tweak name="horizFwdForce" value="0.5" op="1"/>
+      <Tweak name="horizLeftForce" value="0.5" op="1"/>
+      <Tweak name="rotorDiskTiltScale" value="0.44999999" op="0"/>
+     </Tweaks>
+    </TweakGroup>
+    <TweakGroup name="player">
+     <Tweaks>
+      <Tweak name="pitchActionPerTilt" value="0.15000001" op="1"/>
+      <Tweak name="pitchInputConst" value="1" op="0"/>
+      <Tweak name="yawInputConst" value="1" op="0"/>
+      <Tweak name="maxYawRate" value="3.142" op="0"/>
+      <Tweak name="maxYawRate" value="2" op="1"/>
+      <Tweak name="pitchResponsiveness" value="4" op="0"/>
+      <Tweak name="yawResponsiveness" value="8.5" op="0"/>
+      <Tweak name="rollResponsiveness" value="5" op="1"/>
+      <Tweak name="rotationDamping" value="28" op="0"/>
+      <Tweak name="yawPerRoll" value="5" op="1"/>
+      <Tweak name="rotorDiskTiltScale" value="0" op="0"/>
+      <Tweak name="extraRollForTurn" value="30" op="0"/>
+      <Tweak name="powerInputConst" value="0.5" op="1"/>
+     </Tweaks>
+    </TweakGroup>
+   </TweakGroups>
+  </VTOL>
+ </MovementParams>
+ <Particles>
+  <Exhaust insideWater="0" outsideWater="1">
+   <Helpers>
+    <Helper value="thruster1"/>
+    <Helper value="thruster2"/>
+    <Helper value="thruster3"/>
+    <Helper value="thruster4"/>
+   </Helpers>
+   <EngineStart effect="vehicle_fx.vtol.exhaust_start"/>
+   <EngineStop effect="vehicle_fx.vtol.exhaust_start"/>
+   <EngineRunning effect="vehicle_fx.vtol.exhaust" boostEffect="vehicle_fx.vtol.exhaust_start" baseSizeScale="1" minSpeed="0" minSpeedSizeScale="1" minSpeedCountScale="1" minSpeedSpeedScale="1" maxSpeed="70" maxSpeedSizeScale="1" maxSpeedCountScale="1" maxSpeedSpeedScale="1" minPower="0" minPowerSizeScale="1" minPowerCountScale="1" minPowerSpeedScale="1" maxPower="1" maxPowerSizeScale="1" maxPowerCountScale="1" maxPowerSpeedScale="1"/>
+  </Exhaust>
+  <DamageEffects>
+   <DamageEffect name="VehicleDestroyed" helper="" effect="explosions.vtol_explosion.explosion" scaleMax="1" gravityDirection="0,0,1" pulsePeriod="0"/>
+   <DamageEffect name="VehicleFlipped" helper="" effect="explosions.vtol_explosion.explosion" scaleMax="1" gravityDirection="0,0,1" pulsePeriod="0"/>
+   <DamageEffect name="HullDamaged25" helper="burningPos" effect="Vehicle_fx.Damages_Sky.USvtol_hull_smoke_a" scaleMax="1" gravityDirection="0,0,1" pulsePeriod="0"/>
+   <DamageEffect name="HullDamaged75" helper="burningPos" effect="Vehicle_fx.Damages_Sky.USvtol_hull_smoke_b" scaleMax="1" gravityDirection="0,0,1" pulsePeriod="0"/>
+  </DamageEffects>
+  <EnvironmentLayers>
+   <EnvironmentLayer minSpeed="0" minSpeedSizeScale="1" minSpeedCountScale="1" minSpeedSpeedScale="1" maxSpeed="10" maxSpeedSizeScale="1" maxSpeedCountScale="1" maxSpeedSpeedScale="1" minPowerSizeScale="1" minPowerCountScale="1" maxPowerSizeScale="1" maxPowerCountScale="1">
+    <Alignment alignGroundHeight="25" maxHeightSizeScale="0.5" maxHeightCountScale="0.60000002" alignToWater="0"/>
+    <Emitters />
+    <Wheels />
+   </EnvironmentLayer>
+  </EnvironmentLayers>
+ </Particles>
+ <Animations>
+  <Animation name="wings" part="hull">
+   <States>
+    <State name="tovertical" animation="vtol_wings_tovertical" sound="sounds/vehicles:us_vtol:wings_vertical" isLooped="0" speedDefault="1.5" speedMin="1" speedMax="2"/>
+    <State name="tohorizontal" animation="vtol_wings_tohorizontal" sound="sounds/vehicles:us_vtol:wings_horizontal" isLooped="0" speedDefault="1" speedMin="1" speedMax="1"/>
+   </States>
+  </Animation>
+  <Animation name="landingGears" part="hull">
+   <States>
+    <State name="closed" animation="vtol_landing_gear_close" sound="sounds/vehicles:us_vtol:landing_gear_in" isLooped="0" speedDefault="1" speedMin="1" speedMax="1"/>
+   </States>
+  </Animation>
+  <Animation name="passengerDoors" part="hull">
+   <States>
+    <State name="closed" animation="vtol_door_close" sound="sounds/vehicles:us_vtol:backdoor_close" isLooped="0" speedDefault="1" speedMin="1" speedMax="1"/>
+   </States>
+  </Animation>
+  <Animation name="mg_fire" part="hull">
+   <States>
+    <State name="shoot" animation="Vtol_MG_fire" isLooped="0" isLoopedEx="1" speedDefault="1" speedMin="1" speedMax="1"/>
+   </States>
+  </Animation>
+ </Animations>
+ <Inventory>
+  <AmmoTypes>
+   <Ammo type="a2ahomingmissile" capacity="12"/>
+  </AmmoTypes>
+ </Inventory>
+ <Paints>
+  <Paint name="nk" material="objects/vehicles/us_vtol/us_vtol_nk.mtl"/>
+  <Paint name="us" material="objects/vehicles/us_vtol/us_vtol.mtl"/>
+ </Paints>
+ <Modifications>
+  <Modification name="MP">
+   <Elems>
+    <Elem idRef="idHull" name="damageMax" value="800"/>
+    <Elem idRef="idDoorAction" name="type" value="OnUsed"/>
+    <Elem idRef="idDoorDisable" name="disabled" value="1"/>
+   </Elems>
+  </Modification>
+  <Modification name="VTOL_Ascension">
+   <Elems>
+    <Elem idRef="idWeaponDriver" name="class" value="SideWinder_AscMod"/>
+    <Elem idRef="idWeaponPrimary" name="class" value="APCCannon_AscMod"/>
+   </Elems>
+  </Modification>
+  <Modification name="Unarmed">
+   <Elems>
+    <Elem idRef="idWeaponDriver" name="class" value=""/>
+    <Elem idRef="idWeaponGunner" name="class" value=""/>
+    <Elem idRef="idSeatGunner" name="locked" value="1"/>
+   </Elems>
+  </Modification>
+ </Modifications>
+</Vehicle>

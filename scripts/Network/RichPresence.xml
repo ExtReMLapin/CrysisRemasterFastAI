@@ -1,0 +1,16 @@
+<!-- RichPresence on 360/ps3 -->
+<RichPresence>
+	<!-- Maps -->
+	<!-- name: the name of the .cry map file -->
+	<!-- id: the context enum id provided by the xlast for 360 (we map these ids internally for ps3) -->
+	<Element name="island" id="0" />
+	<Element name="village" id="1" />
+	<Element name="rescue" id="2" />
+	<Element name="harbor" id="3" />
+	<Element name="tank" id="4" />
+	<Element name="mine" id="5" />
+	<Element name="core" id="6" />
+	<Element name="ice" id="7" />
+	<Element name="sphere" id="8" />
+	<Element name="fleet" id="9" />
+</RichPresence>

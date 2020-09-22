@@ -1,0 +1,66 @@
+<protect>
+	<add level="1" file="Game/GameData.pak"/>
+  <add level="1" file="Game/LowSpec/LowSpec.pak"/>
+  <add level="1" file="Game/Animations.pak"/>
+	<add level="1" file="Game/Music.pak"/>
+	<add level="1" file="Game/Objects.pak"/>
+	<add level="1" file="Game/Shaders.pak"/>
+	<add level="1" file="Game/Sounds.pak"/>
+	<add level="1" file="Game/Textures.pak"/>
+  <add level="1" file="Bin64/Cry3dEngine.dll"/>
+  <add level="1" file="Bin64/CryAction.dll"/>
+  <add level="1" file="Bin64/CryAISystem.dll"/>
+  <add level="1" file="Bin64/CryAnimation.dll"/>
+  <add level="1" file="Bin64/CryEntitySystem.dll"/>
+  <add level="1" file="Bin64/CryFont.dll"/>
+  <add level="1" file="Bin64/CryGame.dll"/>
+  <add level="1" file="Bin64/CryInput.dll"/>
+  <add level="1" file="Bin64/CryMovie.dll"/>
+  <add level="1" file="Bin64/CryNetwork.dll"/>
+  <add level="1" file="Bin64/CryPhysics.dll"/>
+  <add level="1" file="Bin64/CryRenderD3D9.dll"/>
+  <add level="1" file="Bin64/CryRenderD3D10.dll"/>
+  <add level="1" file="Bin64/CryRenderNULL.dll"/>
+  <add level="1" file="Bin64/CryScriptSystem.dll"/>
+  <add level="1" file="Bin64/CrySoundSystem.dll"/>
+  <add level="1" file="Bin64/CrySystem.dll"/> 
+  <add level="1" folder="Game/Scripts/GameRules" recurse="1"/>
+  <add level="1" folder="Game/Scripts/Entities/Items/xml" recurse="1"/>
+  <add level="1" folder="Game/Scripts" recurse="1"/>
+	<add level="1" folder="Game/Entities" recurse="1"/>
+  <add level="1" folder="Game/Objects/Characters/Human/Asian/Nanosuit" recurse="1"/>
+  <add level="1" folder="Game/Objects/Characters/Human/US/Nanosuit" recurse="1"/>
+	<add level="1" folder="Game/Levels/Multiplayer/IA" recurse="2"/>
+	<add level="1" folder="Game/Levels/Multiplayer/PS" recurse="2"/>
+  <add level="1" folder="Game/Libs" recurse="1"/>
+  <add level="2" folder="Game/Shaders" recurse="1"/>
+  <add level="2" folder="Game/Textures" recurse="1"/>
+  <add level="3" folder="Game/Objects" recurse="1"/>
+  <add level="2" folder="Game/Animations" recurse="1"/>
+  <add level="3" folder="Game/Fonts" recurse="1"/>
+  <add level="3" folder="Game/Materials" recurse="1"/>
+  <add level="3" folder="Game/Music" recurse="1"/>
+  <add level="3" folder="Game/Prefabs" recurse="1"/>
+  <add level="3" folder="Game/Sounds" recurse="1"/>
+  <exclude level="1" file="Game/config/config.dat"/>
+  <exclude level="1" folder="Game/Shaders/Cache" recurse="1"/>
+  <exclude level="1" file="Bin64/Crysis.exe"/>
+  <exclude level="1" folder="Game/Libs/Actiongraphs" recurse="1"/>
+  <exclude level="1" folder="Game/Libs/Config" recurse="1"/>
+  <exclude level="1" folder="Game/Libs/Dialogs" recurse="1"/>
+  <exclude level="1" folder="Game/Libs/EquipmentPacks" recurse="1"/>
+  <exclude level="1" folder="Game/Libs/Flownodes04" recurse="1"/>
+  <exclude level="1" folder="Game/Libs/Gametokens" recurse="1"/>
+  <exclude level="1" folder="Game/Libs/Musiclogic" recurse="1"/>
+  <exclude level="1" folder="Game/Libs/Reverbpresets" recurse="1"/>
+  <exclude level="1" folder="Game/Libs/Soundmoods" recurse="1"/>
+  <exclude level="1" folder="Game/Libs/ui" recurse="1"/>
+  <exclude level="1" folder="Game/Libs/Smartobjects" recurse="1"/>
+  <exclude level="1" wildcard="*/tags.txt"/>
+  <exclude level="1" wildcard="game/levels/multiplayer/*.dds"/>
+  <exclude level="1" wildcard="*.bak"/>
+  <exclude level="1" wildcard="*.bak2"/>
+  <exclude level="1" wildcard="*.tmd"/>
+  <exclude level="1" wildcard="*.cry"/>
+  <exclude level="1" wildcard="*.lyr"/>
+</protect>

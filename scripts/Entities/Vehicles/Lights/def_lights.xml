@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Definition root="DefaultVehicleLights">
+ 	<Array name="Lights" elementName="Light">
+    <Property name="type" type="string" />
+  	<Property name="texture"    					type="string" optional="1" />
+  	<Property name="radius"      					type="float"  optional="1" />
+  	<Property name="diffuse"     					type="Vec3" 	optional="1" />
+  	<Property name="diffuseMult" 					type="float" 	optional="1" />
+  	<Property name="diffuseMult_fp" 			type="float" 	optional="1" />
+  	<Property name="specular"     				type="Vec3" 	optional="1" />
+  	<Property name="specularMult" 				type="float" 	optional="1" />
+  	<Property name="style"     	 					type="int" 		optional="1" />    	
+  	<Property name="frustumAngle"					type="float" 	optional="1" />    	  	    
+	</Array>  
+</Definition>

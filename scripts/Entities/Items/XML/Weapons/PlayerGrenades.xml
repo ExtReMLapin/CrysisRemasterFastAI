@@ -1,0 +1,118 @@
+<item name="PlayerGrenades" class="HandGrenade" category="handgrenade" priority="51" weaponParams="1">
+	<params>
+		<param name="giveable" value="1" />
+		<param name="selectable" value="1" />
+		<param name="droppable" value="0" />
+		<param name="mass" value="0" />
+		<param name="pose" value="ignore" />
+		<param name="melee_attack_firemode"		value="melee" />
+		<param name="two_hand" value="1" />
+	</params>
+	<geometry>
+		<firstperson name="objects/weapons/us/frag_grenade/frag_grenade.chr" angles="0,0,0" />
+		<thirdperson name="objects/weapons/us/frag_grenade/frag_grenade_tp.cgf" angles="0,0,0" />
+	</geometry>	
+	
+	<ammos>
+		<ammo name="explosivegrenade" extra="0" amount="0" />
+	</ammos>
+	
+	<actions>
+		<action name="select">
+			<animation target="firstperson" name="select_grenade_%hand%_01" speed="1.5"/>
+			<animation target="owner" name="select" />
+		</action>
+		
+		<action name="deselect">
+			<animation target="firstperson" name="deselect_grenade_%hand%_01" />
+			<animation target="owner" name="deselect" />
+		</action>
+		
+		<action name="idle" children="1">
+			<animation target="firstperson" name="idle_grenade_%hand%_01" speed="0.7"/>
+			<animation target="owner" name="idle" />
+		</action>
+		
+		<action name="throw_grenade">
+			<animation target="firstperson" name="throw_grenade_%hand%_01" speed="1.35"/>
+			<!--animation target="owner" name="throw" /-->
+			<animation target="ownerloop" name="idle" />
+			<!--<sound target="firstperson" name="sounds/weapons:fraggrenade:fire" radius="5" static="0" />
+			<sound target="thirdperson" name="sounds/weapons:fraggrenade:fire" radius="5" static="0" />-->
+		</action>
+		
+		<action name="pull">
+			<animation target="firstperson" name="pull_ring_grenade_%hand%_01" />
+			<animation target="ownerloop" name="hold_grenade" />
+		</action>
+		
+		<action name="hold_grenade">
+			<animation target="firstperson" name="hold_pause_grenade_%hand%_01" />
+			<!--<sound target="firstperson" name="sounds/weapons:fraggrenade:fire" radius="5" static="0" />
+			<sound target="thirdperson" name="sounds/weapons:fraggrenade:fire" radius="5" static="0" />-->
+		</action>
+		
+		<action name="melee">
+			<animation target="firstperson" name="melee_01" />
+			<animation target="owner" name="melee" />
+			<!--<sound target="firstperson" name="sounds/weapons:melee:fire" radius="5" />-->
+			<sound target="thirdperson" name="sounds/weapons:melee:fire" radius="5" />
+		</action>
+
+		<action name="hit">
+			<sound target="firstperson" name="sounds/physics:bullet_impact:melee_impact_mw" radius="5" />
+			<sound target="thirdperson" name="sounds/physics:bullet_impact:melee_impact_mw" radius="5" />
+		</action>
+	</actions>
+
+	<firemodes>
+		<firemode type="Throw" name="Grenade_Explosive">
+			<fire>
+				<param name="ammo_type" value="explosivegrenade" />
+				<param name="clip_size" value="0" />
+				<param name="rate" value="60" />
+				<param name="damage" value="250" />
+				<param name="helper_tp" value="dummy" />
+				<param name="helper_fp" value="grenade" />
+				<param name="track_projectiles" value="1" />
+			</fire>
+			<throw>
+				<param name="delay" 		value="0.255" />
+				<param name="auto_select_last" value="0" />
+				<param name="auto_select_best" value="1" />
+				<param name="hold_duration" 	 value="0.0" />
+			</throw>
+			<recoil>
+				<param name="max_recoil"	value="0" />
+				<param name="attack" 			value="0" />
+			</recoil>
+			<spread>
+				<param name="max" value="0" />
+				<param name="min" value="0" />
+			</spread>
+			<actions>
+				<param name="throw" value="throw_grenade" />
+				<param name="hold" value="hold_grenade" />
+				<param name="next" value="select" />
+			</actions>
+		</firemode>
+		<firemode name="melee" type="Melee">
+			<melee>
+				<param name="helper" value="collision" />
+				<param name="offset" value="0.35" />
+				<param name="damage" value="145" />
+				<param name="damage_AI" value="30" />
+				<param name="impulse" value="100" />
+				<param name="impulse_human" value="300" />
+				<param name="impulse_vehicle" value="400" />
+				<param name="delay" value="0.13" />
+				<param name="duration" value="0.45" />
+				<paran name="range" value="2.0" />
+			</melee>
+			<actions>
+				<param name="attack" value="melee" />
+			</actions>
+		</firemode>
+	</firemodes>
+
+</item>

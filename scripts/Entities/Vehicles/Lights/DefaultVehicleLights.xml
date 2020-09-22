@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<DefaultVehicleLights>
+  <Lights>
+    <Light type="HeadLightBeam"
+	  texture="textures/lights/flashlight1.dds"
+      diffuse="1,1,1"
+      diffuseMult="10"
+	  specularMult="4"
+      radius="25"
+   />
+    <Light type="HeadLightFlare"
+      diffuse="1,1,1"
+      diffuseMult="30"
+	  specularMult="1"
+      radius="0.3"
+	  frustumAngle="30"
+	  viewDist="255"
+   />
+    <Light type="Rear"
+      diffuse="1,0,0"
+      diffuseMult="5"
+      radius="0.2"
+	  frustumAngle="30"
+   />
+    <Light type="Brake"
+      texture="textures/lights/flashlight1.dds"
+      diffuse="1,0,0"
+      diffuseMult="2"
+      radius="6"
+      frustumAngle="75"
+   />
+    <Light type="Search"
+      texture="textures/lights/flashlight1.dds"
+      frustumAngle="40"
+      radius="20"
+      diffuseMult="5"
+      specularMult="1"
+   />
+    <Light type="HeadLightDynamic"
+      frustumAngle="0"
+      radius="0"
+      diffuseMult="0"
+      specularMult="4"
+   />
+  </Lights>
+</DefaultVehicleLights>
