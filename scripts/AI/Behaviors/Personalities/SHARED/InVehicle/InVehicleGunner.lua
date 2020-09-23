@@ -413,7 +413,7 @@ AI.LogEvent( "puppet -------------------------------- exited_vehicle " );
 			end
 
 			-- when there is no driver	
-			for i,seat in pairs(entity.AI.theVehicle.Seats) do
+			for i,seat in ipairs(entity.AI.theVehicle.Seats) do
 				if( seat.passengerId ) then
 					local member = System.GetEntity( seat.passengerId );
 					if( member ~= nil ) then

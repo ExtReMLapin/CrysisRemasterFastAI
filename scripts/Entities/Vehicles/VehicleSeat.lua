@@ -87,7 +87,7 @@ end
 
 --------------------------------------------------------------------------
 function VehicleSeat:GetWeaponCount()
-	return count(self.Weapons);
+	return #self.Weapons;
 end
 
 --------------------------------------------------------------------------

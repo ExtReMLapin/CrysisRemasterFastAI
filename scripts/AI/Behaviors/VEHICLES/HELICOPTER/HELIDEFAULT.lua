@@ -130,7 +130,7 @@ AIBehaviour.HELIDEFAULT = {
 					return false;
 				end
 			
-				for i,seat in pairs(target.Seats) do	
+				for i,seat in ipairs(target.Seats) do	
 					if( seat.passengerId ) then
 					local member = System.GetEntity( seat.passengerId );
 						if( member ~= nil ) then
@@ -168,7 +168,7 @@ AIBehaviour.HELIDEFAULT = {
 
 	heliRequest2ndGunnerShoot = function( self, entity )
 
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 				local member = System.GetEntity( seat.passengerId );
 				if( member ~= nil ) then
@@ -192,7 +192,7 @@ AIBehaviour.HELIDEFAULT = {
 
 	heliRequest2ndGunnerStopShoot = function( self, entity )
 
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 				local member = System.GetEntity( seat.passengerId );
 				if( member ~= nil ) then
@@ -347,7 +347,7 @@ AIBehaviour.HELIDEFAULT = {
 		local bFound = false;
 		local i;
   	
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 				local member = System.GetEntity( seat.passengerId );
 				if( member ~= nil ) then

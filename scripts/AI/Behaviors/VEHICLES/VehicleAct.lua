@@ -134,7 +134,7 @@ AIBehaviour.VehicleAct = {
 	
 	---------------------------------------------
 	ACT_UNLOAD = function( self,entity,sender,data )
-		local numSeats = count( entity.Seats );
+		local numSeats = #entity.Seats;
 		entity.AI.unloadCount = 1; -- counter increased by one to wait for DO_UNLOAD signal to be processed
 		entity:InsertSubpipe( AIGOALPIPE_SAMEPRIORITY, "check_driver" );
 		entity:InsertSubpipe( AIGOALPIPE_SAMEPRIORITY, "action_unload", nil, data.iValue );

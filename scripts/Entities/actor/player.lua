@@ -869,7 +869,7 @@ function Player:SayOrder( soundName, answer, entity )
 		return 
 	end
 	
-	local numSound = count(orderSoundTable);
+	local numSound = #orderSoundTable;
 	if(numSound ==0) then
 		return 
 	end

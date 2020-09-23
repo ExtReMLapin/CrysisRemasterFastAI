@@ -36,7 +36,7 @@ VehicleBase =
 
 --------------------------------------------------------------------------
 function IsAnyPassenger(seats)
-	for i,s in pairs(seats) do	  	  
+	for i,s in ipairs(seats) do	  	  
 		if (s.seat:GetPassengerId()) then		  
 			return true;
 		end
@@ -47,7 +47,7 @@ end
 
 --------------------------------------------------------------------------
 function VehicleBase:HasDriver()
-	for i,seat in pairs(self.Seats) do
+	for i,seat in ipairs(self.Seats) do
 		if (seat.isDriver) then
 			if (seat.passengerId) then
 				return true;
@@ -60,7 +60,7 @@ end
 
 --------------------------------------------------------------------------
 function VehicleBase:GetDriverId()
-	for i,s in pairs(self.Seats) do
+	for i,s in ipairs(self.Seats) do
 		if (s.isDriver) then
 			return s.seat:GetPassengerId();
 		end
@@ -89,7 +89,7 @@ end
 
 --------------------------------------------------------------------------
 function GetNextAvailableSeat(seats)
-	for i,s in pairs(seats) do
+	for i,s in ipairs(seats) do
 		if (not s.seat:GetPassengerId()) then
 			return i;
 		end
@@ -208,14 +208,14 @@ function VehicleBase:MountEntity(a_className, transformTable, propertiesTable) -
 		
 		self:AttachChild(spawnedEntity.id, 0);		
 								
-		self.State.Carriage[count(self.State.Carriage)+1] = 
-		{
+		table.insert(self.State.Carriage, {
 		  id = spawnedEntity.id, -- todo: correct index
 		  object = propertiesTable.object_Model,
 		  position = spawnParams.position,
 		  orientation = spawnParams.orientation,		  
 		  useText = transformTable.useText,
-		};		
+		})
+				
 		
 	else
 		Log("Couldn't spawn the child entity attachment");
@@ -227,7 +227,7 @@ end
 --------------------------------------------------------------------------
 function VehicleBase:DestroyCarriage()
   if (self.State.Carriage) then
-    for i,cargo in pairs(self.State.Carriage) do
+    for i,cargo in ipairs(self.State.Carriage) do
     	if (cargo.id) then        		
   			Entity.DetachThis(cargo.id, 0);
   			System.RemoveEntity(cargo.id);	
@@ -273,7 +273,7 @@ end
 function VehicleBase:GetSeatPos(seatId)
 	if (seatId == -1) then
 		Log("Error: VehicleBase:GetSeatPos(seatId) - seatId -1 is invalid");
-		return {x=0, y=0, z=0,};
+		return {x=0, y=0, z=0,}; -- don't ralloc table on the fly
 	else
 		
 		local helper = self.Seats[seatId].enterHelper;
@@ -336,7 +336,7 @@ function VehicleBase:IsUsable(user)
 	
 	-- check cargo 
 	if (self.State.Carriage) then 		  
-	  for i,cargo in pairs(self.State.Carriage) do
+	  for i,cargo in ipairs(self.State.Carriage) do
       local ent = System.GetEntity(cargo.id);
       if (ent) then
         local distSq = DistanceSqVectors(pos, ent:GetWorldPos()); 
@@ -592,7 +592,7 @@ function VehicleBase:RequestMostPrioritarySeat(userId)
 		return 1;
 	end
 
-	for i,seat in pairs(self.Seats) do
+	for i,seat in ipairs(self.Seats) do
 		-- search for gunner seats
 		if (seat.enterHelper and seat.Weapons and seat:IsFree()) then
 			if AI then AI.LogEvent(System.GetEntity(userId):GetName().." found seat "..i) end;
@@ -600,7 +600,7 @@ function VehicleBase:RequestMostPrioritarySeat(userId)
 		end
 	end
 
-	for i,seat in pairs(self.Seats) do
+	for i,seat in ipairs(self.Seats) do
 		-- search for remaining seats
 		if (seat.enterHelper and seat:IsFree()) then
 			if AI then AI.LogEvent(System.GetEntity(userId):GetName().." found seat "..i) end;
@@ -617,7 +617,7 @@ function VehicleBase:RequestSeat(userId)
 	local pos = System.GetEntity(userId):GetWorldPos();
 	local radiusSq = 6;
 
-	for i,seat in pairs(self.Seats) do
+	for i,seat in ipairs(self.Seats) do
 		if (seat:IsFree()) then
 			return i;
 		end

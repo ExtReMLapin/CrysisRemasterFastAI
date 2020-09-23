@@ -88,7 +88,7 @@ AIBehaviour.TankFixedIdle = {
 	end,
 
 	INVEHICLE_REQUEST_STOP_FIRE_NEXT = function( self, entity, sender )
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 				local member = System.GetEntity( seat.passengerId );
 				if( member ~= nil ) then
@@ -109,7 +109,7 @@ AIBehaviour.TankFixedIdle = {
 	OnPlayerSeen = function( self, entity, fDistance )
 
 		-- called when the AI sees a living enemy
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 				local member = System.GetEntity( seat.passengerId );
 				if( member ~= nil ) then

@@ -22,7 +22,7 @@ AIBehaviour.TANKDEFAULT = {
 	--------------------------------------------------------------------------
 	request2ndGunnerShoot = function( self, entity )
 
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 				local member = System.GetEntity( seat.passengerId );
 				if( member ~= nil ) then
@@ -52,7 +52,7 @@ AIBehaviour.TANKDEFAULT = {
 		local i;
 		local j;
 
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 				local member = System.GetEntity( seat.passengerId );
 				if( member ~= nil ) then
@@ -107,7 +107,7 @@ AIBehaviour.TANKDEFAULT = {
 	--------------------------------------------------------------------------
 	tankHasGunner = function( self, entity )
 
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 				local member = System.GetEntity( seat.passengerId );
 				if( member ~= nil ) then
@@ -135,7 +135,7 @@ AIBehaviour.TANKDEFAULT = {
 
 			local i;
  
-			for i,seat in pairs(entity.Seats) do
+			for i,seat in ipairs(entity.Seats) do
 				if( seat.passengerId ) then
 					local member = System.GetEntity( seat.passengerId );
 					if( member ~= nil ) then
@@ -240,7 +240,7 @@ AIBehaviour.TANKDEFAULT = {
 		local i;
 
   	--[[
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 				local member = System.GetEntity( seat.passengerId );
 				if( member ~= nil ) then

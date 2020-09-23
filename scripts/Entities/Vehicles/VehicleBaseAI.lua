@@ -377,7 +377,7 @@ end
 --------------------------------------------------------------------------
 function VehicleBaseAI:FindPassengers()
 	if (not AI) then return end
-	local numSeats = count(self.Seats);
+	local numSeats = #self.Seats;
 	local numHumans = AI.GetGroupCount(self.id,GROUP_ENABLED,AIOBJECT_ACTOR);
 	local numCrew;
 --	System.Log("vehicle "..self:GetName().." humans = "..numHumans);
@@ -434,7 +434,7 @@ end
 --------------------------------------------------------------------------
 function VehicleBaseAI:SignalCrew(signalText,data)
 	if (not AI) then return end
-	for i,seat in pairs(self.Seats) do
+	for i,seat in ipairs(self.Seats) do
 		if(seat.passengerId) then
 			AI.Signal(SIGNALFILTER_SENDER,0,signalText,seat.passengerId,data);
 		end
@@ -864,7 +864,6 @@ AI.LogEvent(">>>> moving to point ");
 
 	if( self.State.aiDriver == nil )then	--let's get driver inside		
 
-	local numSeats = count(self.Seats);
 	local numHumans = AI.GetGroupCount(self.id,GROUP_ENABLED,AIOBJECT_ACTOR);
 	local bFound = false;
 
@@ -1036,7 +1035,7 @@ end
 
 --------------------------------------------------------------------------
 function VehicleBaseAI:GetSeatWithWeapon(weapon)
-	for i,seat in pairs(self.Seats) do
+	for i,seat in ipairs(self.Seats) do
 		--if (seat.Weapons) then
 			local wc = seat.seat:GetWeaponCount()
 			for j=1, wc do			
@@ -1139,7 +1138,7 @@ end
 function VehicleBaseAI:AutoDisablePassangers( status )
 	if not AI then return end
 
-	for i,seat in pairs(self.Seats) do	  	  
+	for i,seat in ipairs(self.Seats) do	  	  
 		if (seat:GetPassengerId()) then		  
 			AI.AutoDisable( seat:GetPassengerId(), status );
 		end
@@ -1151,7 +1150,7 @@ function VehicleBaseAI:OnPassengerDead( passenger )
 
 	if ( self.class == "Asian_helicopter" ) then
 
-		for i,seat in pairs(self.Seats) do
+		for i,seat in ipairs(self.Seats) do
 			if( seat.passengerId ) then
 				local member = System.GetEntity( seat.passengerId );
 				if( member ~= nil ) then
@@ -1177,7 +1176,7 @@ end
 
 function VehicleBaseAI:IsEntityOnVehicle(entityId)
 	if(entityId) then		
-		local numSeats = count( self.Seats );
+		local numSeats = #self.Seats;
 		for i=1,numSeats do
 			local seat = self:GetSeatByIndex( i );
 			if ( seat ) then

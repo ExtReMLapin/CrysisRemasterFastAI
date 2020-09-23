@@ -652,7 +652,7 @@ AIBehaviour.HeliReinforcement = {
 			return;
 		end
 	
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 
 				local member = System.GetEntity( seat.passengerId );
@@ -693,7 +693,7 @@ AIBehaviour.HeliReinforcement = {
 
 		local count = 0;
 
-		for i,seat in pairs(entity.Seats) do
+		for i,seat in ipairs(entity.Seats) do
 			if( seat.passengerId ) then
 
 				local member = System.GetEntity( seat.passengerId );

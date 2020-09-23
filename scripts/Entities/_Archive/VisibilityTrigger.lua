@@ -82,7 +82,7 @@ function VisibilityTrigger:Event_Visible( sender )
 	end
 	if(self.Properties.PlaySequence~="")then
 		Movie.PlaySequence( self.Properties.PlaySequence );
-	endﬂ
+	end
 
 	BroadcastEvent( self,"Visible" );
 	

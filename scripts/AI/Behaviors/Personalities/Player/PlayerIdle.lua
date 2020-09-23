@@ -128,7 +128,7 @@ AIBehaviour.PlayerIdle = {
 	 		return;
 	 	end
 
-		local numSeats = count( vehicle.Seats );
+		local numSeats = #vehicle.Seats;
 
 		if ( data.fValue<1 or data.fValue>numSeats ) then
 			entity.AI.mySeat = vehicle:RequestClosestSeat( entity.id );

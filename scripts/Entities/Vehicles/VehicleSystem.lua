@@ -57,7 +57,7 @@ function ForcePassengersToExit(vehicleName)
 	local v = System.GetEntityByName(vehicleName);
 	
 	if (v and v.vehicle) then
-		for i,seat in pairs(v.Seats) do
+		for i,seat in ipairs(v.Seats) do
 			local passengerId = seat:GetPassengerId();
 			if (passengerId) then
 				v:LeaveVehicle(passengerId);

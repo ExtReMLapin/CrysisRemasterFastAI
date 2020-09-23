@@ -318,7 +318,7 @@ AIBehaviour.HBaseIdle = {
 	 		return
 	 	end
 
-		local numSeats = count(entity.AI.theVehicle.Seats);
+		local numSeats = #entity.AI.theVehicle.Seats;
 		local numMembers = AI.GetGroupCount(entity.id,GROUP_ENABLED,AIOBJECT_ACTOR);
 
 		local seatIndex = data.fValue;

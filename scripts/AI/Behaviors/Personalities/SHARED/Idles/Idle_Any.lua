@@ -255,7 +255,7 @@ Idle_Any = {
 	------------------------------------------------------------------------
 
 	GetOneAnimation = function (self,table,entity)
-		local nr_rnd = count(table);
+		local nr_rnd = #table;
 		local rnd = random(1,nr_rnd);
 
 		if (table[rnd].times_PLAYED==nil) then
